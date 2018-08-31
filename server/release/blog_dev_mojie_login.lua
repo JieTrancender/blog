@@ -13,7 +13,7 @@ luaservice = root.."skynet/service/?.lua;"..root..project_name.."/?.lua;"..root.
 lualoader = root.."skynet/lualib/loader.lua"
 cpath = root.."skynet/cservice/?.so;"..root.."cservice/?.so"
 snax = root.."skynet/examples/?.lua;"..root.."skynet/test/?.lua;"..root.."service/?.lua"
-lua_path = root.."skynet/lualib/?.lua;"..root.."skynet/lualib/?/init.lua;"..root..project_name.."/?.lua"
+lua_path = root.."lualib/?.lua;"..root.."skynet/lualib/?.lua;"..root.."skynet/lualib/?/init.lua;"..root..project_name.."/?.lua"
 lua_cpath = root.."skynet/luaclib/?.so"
 
 debug_console = 11008
