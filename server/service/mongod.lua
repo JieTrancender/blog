@@ -1,8 +1,10 @@
+require "common"
+
 local skynet = require "skynet"
 local mongo = require "skynet.db.mongo"
 local json = require "cjson"
 
-local DEBUG = skynet.getenv("DEBUG")
+local DEBUG
 local bson_encode
 
 local makeConf = function ( hosts, username, password )
@@ -27,6 +29,7 @@ end
 
 local db, db_name
 function init( ... )
+	DEBUG = skynet.getenv("DEBUG")
 	if DEBUG then
 		local bson = require "bson"
 		bson_encode = bson.encode
@@ -39,6 +42,9 @@ function init( ... )
 	if db == nil then
 		logError("mongod failed to connect")
 	end
+
+	print_r(db)
+	print("--------debug", skynet.getenv("DEBUG"))
 end
 
 function exit( ... )
@@ -75,10 +81,7 @@ function accept.update( tableName, selector, tbl, upsert, multi )
 	end
 
 	if upsert == nil then upsert = true end
-	local ret = db[db_name][tableName]:update(selector, tbl, upsert, multi)
-	if ret == nil then
-		skynet.error("mongod update, errno:", json.encode(ret), json.encode(tbl))
-	end
+	db[db_name][tableName]:update(selector, tbl, upsert, multi)
 end
 
 -- 同步更新
@@ -130,12 +133,7 @@ function response.find( tableName, tbl, sort, skip, limit, selector )
 end
 
 function response.findOne( tableName, tbl, selector )
-	local ret = db[db_name][tableName]:findOne(tbl, selector)
-	if ret == nil or ret.n ~= 1 then
-		skynet.error("mongod update, errno:", json.encode(ret), json.encode(tbl))
-	end
-
-	return ret
+	return db[db_name][tableName]:findOne(tbl, selector)
 end
 
 function response.findMulti( tableNameList, tbl )

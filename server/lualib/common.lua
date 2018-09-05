@@ -1,3 +1,7 @@
+util = require "util"
+
+local c = require "skynet.core"
+
 function split( str, delim )
 	if str == nil or str == "" then return {} end
 
@@ -22,4 +26,41 @@ function split( str, delim )
 	table.insert(result, string.sub(str, start))
 
 	return result
+end
+
+function print_r( obj )
+	print(util.table_dump(obj))
+end
+
+--日志输出
+function logImp( ... )
+	local t = {...}
+	for i=1,#t do
+		t[i] = tostring(t[i])
+	end
+	return c.error(table.concat(t, " "))
+end
+
+function log( ... )
+	if _roleId then
+		logImp(_roleId, ...)
+	else
+		logImp(...)
+	end
+end
+
+function logError( ... )
+	if _roleId then
+		logImp(_roleId, "error", ...)
+	else
+		logImp("error", ...)
+	end
+end
+
+function logWarning( ... )
+	if _roleId then
+		logImp(_roleId, "warning", ...)
+	else
+		logImp("warning", ...)
+	end
 end
