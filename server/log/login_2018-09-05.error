@@ -1,0 +1,56 @@
+18:32:44 [a] lua loader error : ./login/logind.lua:4: module 'snax' not found:
+	no field package.preload['snax']
+	no file './lualib/snax.lua'
+	no file './skynet/lualib/snax.lua'
+	no file './skynet/lualib/snax/init.lua'
+	no file './login/snax.lua'
+	no file './skynet/luaclib/snax.so'
+	no file './luaclib/snax.so'
+stack traceback:
+	[C]: in function 'require'
+	./login/logind.lua:4: in local 'main'
+	./skynet/lualib/loader.lua:48: in main chunk
+
+18:33:02 [a] lua call [8 to :a : 5 msgsz = 6] error : [31m./skynet/lualib/skynet.lua:643: ./skynet/lualib/skynet.lua:197: ./login/logind.lua:31: source::00000008, command:start
+stack traceback:
+	[C]: in function 'assert'
+	./login/logind.lua:31: in upvalue 'f'
+	./skynet/lualib/skynet.lua:154: in function <./skynet/lualib/skynet.lua:126>
+stack traceback:
+	[C]: in function 'assert'
+	./skynet/lualib/skynet.lua:643: in function 'skynet.dispatch_message'[0m
+
+18:33:02 [8] init service failed: ./skynet/lualib/skynet.lua:371: call failed
+stack traceback:
+	[C]: in function 'error'
+	./skynet/lualib/skynet.lua:371: in upvalue 'yield_call'
+	./skynet/lualib/skynet.lua:388: in function 'skynet.manager.call'
+	./login/main.lua:20: in local 'start'
+	./skynet/lualib/skynet.lua:747: in function <./skynet/lualib/skynet.lua:744>
+	[C]: in function 'xpcall'
+	./skynet/lualib/skynet.lua:751: in function 'skynet.manager.pcall'
+	./skynet/lualib/skynet.lua:755: in function 'skynet.manager.init_service'
+	./skynet/lualib/skynet.lua:768: in upvalue 'f'
+	./skynet/lualib/skynet.lua:127: in function <./skynet/lualib/skynet.lua:126>
+
+18:34:16 [a] lua call [8 to :a : 5 msgsz = 38] error : [31m./skynet/lualib/skynet.lua:643: ./skynet/lualib/skynet.lua:197: ./login/logind.lua:32: attempt to call a nil value (global 'f')
+stack traceback:
+	./login/logind.lua:32: in upvalue 'f'
+	./skynet/lualib/skynet.lua:154: in function <./skynet/lualib/skynet.lua:126>
+stack traceback:
+	[C]: in function 'assert'
+	./skynet/lualib/skynet.lua:643: in function 'skynet.dispatch_message'[0m
+
+18:34:16 [8] init service failed: ./skynet/lualib/skynet.lua:371: call failed
+stack traceback:
+	[C]: in function 'error'
+	./skynet/lualib/skynet.lua:371: in upvalue 'yield_call'
+	./skynet/lualib/skynet.lua:388: in function 'skynet.manager.call'
+	./login/main.lua:20: in local 'start'
+	./skynet/lualib/skynet.lua:747: in function <./skynet/lualib/skynet.lua:744>
+	[C]: in function 'xpcall'
+	./skynet/lualib/skynet.lua:751: in function 'skynet.manager.pcall'
+	./skynet/lualib/skynet.lua:755: in function 'skynet.manager.init_service'
+	./skynet/lualib/skynet.lua:768: in upvalue 'f'
+	./skynet/lualib/skynet.lua:127: in function <./skynet/lualib/skynet.lua:126>
+
