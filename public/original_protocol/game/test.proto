@@ -1,0 +1,16 @@
+package test;
+
+message TaskInfo {
+	required uint32 id = 1;
+	required uint64 key = 2;
+	required uint32 status = 3;
+}
+
+message GetTaskInfo {
+	required uint32 type = 1;
+}
+
+message GetTaskInfoR {
+	optional int32 err = 1 [default = 0];
+	repeated TaskInfo info = 2;
+}

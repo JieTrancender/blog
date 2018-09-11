@@ -1,0 +1,18 @@
+package loginGame;
+
+message LoginGame {
+	required uint32 playerId = 1;
+	required string username = 2;
+	required string name = 3;
+	required string sessionkey = 4;
+	required string deviceId = 5;
+	required string codeVersion = 6;
+}
+
+message LoginGameR {
+	optional int32 err = 1 [default = 0];
+	required uint64 sysDt = 2;
+	required string timeZone = 3;
+	required uint64 serverOpenDt = 4;  // 开服时间，0表示未设置，与开服时间相关功能均不开启
+	required uint64 offlineDt = 5;  // 上次离线时间
+}
