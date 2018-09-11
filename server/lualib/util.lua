@@ -1,5 +1,9 @@
 local tbl = {}
 
+function tbl.add_path( path )
+    package.path = package.path .. ";" .. path
+end
+
 function tbl.table_dump(obj)
     local getIndent, quoteStr, wrapKey, wrapVal, dumpObj
     getIndent = function(level)

@@ -1,4 +1,5 @@
 util = require "util"
+oo = require "oo"
 
 local c = require "skynet.core"
 
