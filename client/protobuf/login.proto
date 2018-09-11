@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package login;
+
+message RoleInfo {
+	required int64 playerId = 1;
+	required string name = 2;
+	required string sessionkey = 3;
+	required string gameUrl = 4;
+	required int64 camp = 5;
+	optional uint64 createDt = 6;
+}
+
+message Login {
+	required string username = 1;
+	optional string token = 2;
+	optional string clientPasswd = 3;
+	optional string platform = 4 [default = "test"];
+	optional uint32 osCode = 5;
+	optional string deviceId = 6;
+	required string codeVersion = 7;
+	required int32 serverId = 8;
+	optional string subPlatform = 9 [default = "test"];
+	required string userAgent = 10;
+}
+
+message LoginR {
+	optional int64 err = 1 [default = 0];
+	optional RoleInfo info = 2;
+}

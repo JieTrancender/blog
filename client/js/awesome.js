@@ -1,0 +1,12 @@
+module.exports = {
+  "nested": {
+    "AwesomeMessage": {
+      "fields": {
+        "awesomeField": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    }
+  }
+}

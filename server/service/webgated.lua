@@ -28,7 +28,9 @@ end
 
 local function handle_socket(id, addr)
     -- limit request body size to 8192 (you can pass nil to unlimit)
+    print("------handler_socket")
     local code, url, method, header, body = httpd.read_request(sockethelper.readfunc(id), 8192)
+    print("-------", code, url, method, header, body)
     if code then
 
         if url == "/ws" then
@@ -76,6 +78,7 @@ end
 
 skynet.start(function()
     skynet.dispatch("lua", function(session, source, command, ...)
+        print("webgated:", session, source, command)
         local f = assert(CMD[command], string.format("source:%s, command:%s", skynet.address(source), command))
         if session > 0 then
             skynet.retpack(f(source, ...))

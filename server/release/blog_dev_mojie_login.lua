@@ -33,10 +33,10 @@ mysql_passwd = "a161076566b0f278"
 mysql_db = "blog_release_test_game_log_"..server_id
 
 client_ip = "0.0.0.0"
-client_port = "120"..(server_id - 1).."1"
+client_port = "110"..(server_id - 1).."1"
 
 web_ip = "0.0.0.0"
-web_port = "120"..(server_id - 1).."2"
+web_port = "110"..(server_id - 1).."2"
 
 server_ip = "0.0.0.0"
-server_port = "120"..(server_id - 1).."3"
+server_port = "110"..(server_id - 1).."3"

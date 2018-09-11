@@ -3,7 +3,7 @@ require "common"
 local skynet = require "skynet"
 
 local server_ip = "127.0.0.1"
-local server_port = 12001
+local server_port = 11001
 
 local username = "fri51"
 

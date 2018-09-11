@@ -1,5 +1,15 @@
 //index.js
 //获取应用实例
+var protobuf = require("../../js/protobuf-light.js")
+// var protobuf = require("../../node_modules/pro")
+// var loginConfig = require("../../js/login.js")
+// var awesomeConfig = require("../../js/awesome.js")
+// import "../../js/protobuf"
+// var protobuf = require("../../../jsprotobufjs")
+// var protobuf = require("../../js/proto.js");
+// var loginConfig = require("../../js/login.js")
+var loginConfig = require("../../json/login.json")
+
 const app = getApp()
 
 Page({
@@ -42,6 +52,49 @@ Page({
         }
       })
     }
+
+    console.log("onLoad......")
+    wx.connectSocket({
+      url: 'wss://local.jie-trancender.org/ws',
+    })
+
+    wx.onSocketOpen(function(res) {
+      console.log("websocket连接已打开!")
+      console.log(res)
+
+      console.log(protobuf)
+
+      var LoginRoot = protobuf.Root.fromJSON(loginConfig)
+
+      console.log(LoginRoot)
+
+      var Login = LoginRoot.lookupType("login.Login")
+      console.log(Login)
+
+      var testLogin = LoginRoot.lookupType("Login")
+      console.log(testLogin)
+
+        var msg = {
+          username: "fri51",
+          serverId: 1,
+          userAgent: "{\"userAgent:\"\"",
+          clientPasswd: "client_passwd",
+        }
+
+        console.log("msg", msg)
+
+        // var message = Login.create(msg)
+
+        var AwesomeRoot = protobuf.Root.fromJSON(awesomeConfig)
+        var AwesomeMessage = AwesomeRoot.lookupType("AwesomeMessage")
+
+        var payload = {awesomeField: "我是test1"}
+        var message = AwesomeMessage.create(payload)
+    })
+
+    wx.onSocketError(function(res) {
+      console.log("websocket连接打开失败，请检查！")
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -50,5 +103,8 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  onShow: function() {
+    console.log("onShow......")
   }
 })
