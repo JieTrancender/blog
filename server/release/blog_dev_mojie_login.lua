@@ -4,7 +4,7 @@ project_name = "login"
 thread = 2
 logservice = "mylogger"
 logger = "./log/login"
--- logger = nil
+logger = nil
 harbor = 0
 start = "main"
 bootstrap = "snlua bootstrap"
@@ -25,12 +25,12 @@ server_id = 1
 mongo_hosts = "192.168.3.130:27017"
 mongo_user = nil
 mongo_passwd = nil
-mongo_db = "pkm_release_test_game_"..server_id
+mongo_db = "blog_release_test_game_"..server_id
 
 mysql_ip = "127.0.0.1"
 mysql_user = "root"
 mysql_passwd = "a161076566b0f278"
-mysql_db = "pkm_release_test_game_log_"..server_id
+mysql_db = "blog_release_test_game_log_"..server_id
 
 client_ip = "0.0.0.0"
 client_port = "120"..(server_id - 1).."1"
