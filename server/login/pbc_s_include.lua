@@ -99,7 +99,12 @@ end
 local unpack = string.unpack
 
 function tbl:unpack( msgBuf, sz )
+	print_r(msgBuf)
 	local id1, id2, sid, pbBuf = unpack(">I1>I2>I1c" .. (sz - 4), msgBuf)
+	print_r(pbBuf)
+	print("------tbl:unpack", id1, id2, sid)
+
+
 	local pattern = tbl:getpattern(id1, id2)
 	local msg = protobuf.decode(pattern, pbBuf)
 
