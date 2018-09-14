@@ -34,7 +34,7 @@ end
 local connHandler = {}  -- {key:fd, value:hash<addr,source>}
 local function send_to_client( fd, package, size )
 	if connHandler[fd] and connHandler[fd].source == gate_w then
-		skynetsend(gate_w, "lua", "send", fd, package)
+		skynet.send(gate_w, "lua", "send", fd, package)
 	else
 		socketdriver.send(fd, package, size)
 	end

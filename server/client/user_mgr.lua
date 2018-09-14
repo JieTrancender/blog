@@ -95,6 +95,7 @@ function UserMgr:sendLogin( msg, id1, id2 )
 end
 
 function UserMgr:login( account )
+	print("-----------UserMgr:login", account)
 	local username = account or "robot"
 
 	self._username = username

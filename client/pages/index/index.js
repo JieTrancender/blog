@@ -90,66 +90,77 @@ Page({
       var strBuf = Login.encode(message).finish()
       console.log("buffer.length", strBuf.length, strBuf)
 
-      var size = 4 + strBuf.length
-      var sz1 = size / 65536
-      var sz2 = size % 65536
-      // var buf = 2字节size
-      // 两字节长度，一字节一级协议，两字节二级协议，一字节域，后面接包内容
+       // 两字节长度，一字节一级协议，两字节二级协议，一字节域，后面接包内容
 
-      // var buf = new Uint8Array(size)
-      var buf = new ArrayBuffer(size)
+      var size = 4 + strBuf
 
-      console.log(buf)
-
-      var dv = new DataView(buf)
-
-      console.log("dv:", dv.length, dv)
+      var buffer = new ArrayBuffer(strBuf.length + 4 + 2)
+      var dv = new DataView(buffer, 0)
 
       dv.setInt16(0, size)
-      dv.setInt8(2, sz1)
-      dv.setInt16(3, sz2)
-      
+      dv.setInt8(2, 3)
+      dv.setInt16(3, 2)
+      dv.setInt8(5, 0)
 
-      // buf.setUint16(size)
+      for (var i = 0; i < strBuf.length; i++) {
+        dv.setInt8(6 + i, strBuf[i])
+      }
 
-      console.log("dv:", dv.length, dv)
-      // buf.setUint8(sz1)
-      // buf.setUint16(sz2)
-      // var len = buf.length
-      // for (var i = 0, i < buf.length; ++i) {
-      //   buf[len + i] = strBuf[i]
-      // }
+      console.log(dv)
 
-      // console.log("---length", buf.length, buf)
+      var data = new Uint8Array(buffer)
 
+      console.log(data)
 
-      // var decodeBuffer = Login.decode(buffer)
+      wx.sendSocketMessage({
+        data: data
+      })
 
-      // console.log("decodeBuffer", decodeBuffer)
+      wx.ons
+    })
 
-      // var bytes = new Array()
-
-      // bytes.push(43)
-
-      // bytes.push(buffer)
-
-      // console.log(buffer)
-
-      // // 2字节 + 
-
-      // wx.sendSocketMessage({
-      //   data:buffer
-      // })
-
-        // var AwesomeRoot = protobuf.Root.fromJSON(awesomeConfig)
-        // var AwesomeMessage = AwesomeRoot.lookupType("AwesomeMessage")
-
-        // var payload = {awesomeField: "我是test1"}
-        // var message = AwesomeMessage.create(payload)
+    wx.onSocketClose(function(res) {
+      console.log("websocket连接已关闭!")
     })
 
     wx.onSocketError(function(res) {
       console.log("websocket连接打开失败，请检查！")
+    })
+
+    wx.onSocketMessage(function(res) {
+      console.log("websocket：服务端消息", res.data)
+
+      // var data = new Uint8Array(res.data)
+
+      console.log(res.data)
+
+      var dv = new DataView(res.data)
+
+      var size = dv.getUint16(0)
+      var id1 = dv.getUint8(2)
+      var id2 = dv.getUint16(3)
+      var sid = dv.getUint8(5)
+
+      console.log("encode", size, id1, id2, sid)
+
+      var message = new ArrayBuffer(16)
+
+      // 解包
+      // var sizeView = new Uint16Array(data, 0, 1)
+      // var id1 = new Uint8Array(data, 2, 1)
+      // var id2 = new Uint16Array(data, 3, 1)
+      // var sid = new Uint8Array(data, 5, 1)
+
+      // var pbBuf = new Uint8Array(data, 6)
+
+      // console.log("encode", sizeView, id1, id2, sid)
+
+      // var LoginRoot = protobuf.Root.fromJSON(loginConf)
+      // var LoginR = LoginRoot.lookupType("login.LoginR")
+
+      // var message = LoginR.decode(pbBuf)
+
+      // console.log("message:", message)
     })
   },
   getUserInfo: function(e) {
