@@ -1,19 +1,5 @@
 //index.js
 //获取应用实例
-// var protobuf = require("../../js/protobuf-light.js")
-// var protobuf = require("../../node_modules/pro")
-// var loginConfig = require("../../js/login.js")
-// var awesomeConfig = require("../../js/awesome.js")
-// import "../../js/protobuf"
-// var protobuf = require("../../../jsprotobufjs")
-// var protobuf = require("../../js/proto.js");
-// var loginConfig = require("../../js/login.js")
-// var loginConfig = require("../../json/login.json")
-
-// var protobuf = require("../../js/protobuf.js");
-// var loginConf = require("../../js/login.js");
-
-
 const app = getApp()
 
 var util = require("../../weichatPb/src/util.js")
@@ -25,7 +11,10 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    list: [{
+      nameArr: 'sdasda|1|33|44'
+    }]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -60,6 +49,8 @@ Page({
         }
       })
     }
+
+    require('../../test/testProtocolBuffer');
 
     console.log("onLoad......")
     wx.connectSocket({
@@ -116,7 +107,7 @@ Page({
         data: data
       })
 
-      wx.ons
+      // wx.ons
     })
 
     wx.onSocketClose(function(res) {
