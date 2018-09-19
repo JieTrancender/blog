@@ -1,5 +1,28 @@
 //app.js
+
+/**
+* WeChat API 模块
+* 用于将微信官方API封装成Promise方式
+* 小程序支持以CommonJS规范组织代码结构
+*/
+const wechat = require('./utils/wechat.js')
+
+const douban = require('./utils/douban.js')
+
 App({
+  /**
+  * global shared
+  * 整个应用共享
+  */
+  data: {
+    name: 'Blog',
+    version: '0.0.0.1',
+    currentCity: '北京'
+  },
+
+  wechat: wechat,
+  douban: douban,
+
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

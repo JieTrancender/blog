@@ -1,31 +1,27 @@
-module.exports = {
+module.exports = 
+{
   "nested": {
     "login": {
       "nested": {
         "RoleInfo": {
           "fields": {
             "playerId": {
-              "rule": "required",
               "type": "int64",
               "id": 1
             },
             "name": {
-              "rule": "required",
               "type": "string",
               "id": 2
             },
             "sessionkey": {
-              "rule": "required",
               "type": "string",
               "id": 3
             },
             "gameUrl": {
-              "rule": "required",
               "type": "string",
               "id": 4
             },
             "camp": {
-              "rule": "required",
               "type": "int64",
               "id": 5
             },
@@ -38,7 +34,6 @@ module.exports = {
         "Login": {
           "fields": {
             "username": {
-              "rule": "required",
               "type": "string",
               "id": 1
             },
@@ -66,12 +61,10 @@ module.exports = {
               "id": 6
             },
             "codeVersion": {
-              "rule": "required",
               "type": "string",
               "id": 7
             },
             "serverId": {
-              "rule": "required",
               "type": "int32",
               "id": 8
             },
@@ -83,7 +76,6 @@ module.exports = {
               }
             },
             "userAgent": {
-              "rule": "required",
               "type": "string",
               "id": 10
             }
