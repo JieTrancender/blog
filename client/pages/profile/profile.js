@@ -3,12 +3,8 @@ const app = getApp()
 
 Page({
 	data: {
-		title: 'About',
-		userInfo: {
-			wechat: 'WEDN-NET',
-			nickName: 'https://github.com/zce/weapp-douban',
-			avatarUrl: '../../images/qrcode.png'
-		}
+		userInfo: null,
+		canIUse: wx.canIUse('button.open-type.getUserInfo')
 	},
 
 	getUserInfo() {
@@ -17,6 +13,17 @@ Page({
 	},
 
 	onLoad() {
+		app.wechat.getSetting()
+			.then(res => {
+				if (res.authSetting['scope.userInfo']) {
+					app.wechat.getUserInfo()
+						.then(res => {
+							console.log(res)
+						})
+				}
+				console.log(res)
+			})
+
 		app.wechat.login()
 			.then(res => {
 				if (res.code) {
@@ -25,5 +32,8 @@ Page({
 					console.error('获取用户登录状态失败:' + res.errMsg)
 				}
 			})
+	},
+	bindGetUserInfo(e) {
+		console.log(e)
 	}
 })

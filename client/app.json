@@ -28,6 +28,12 @@
     "backgroundColor": "#f8f9fb",
     "list": [
       {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-actived.png"
+      },
+      {
         "text": "榜单",
         "pagePath": "pages/board/board",
         "iconPath": "images/board.png",

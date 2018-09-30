@@ -1,6 +1,6 @@
-function login() {
+function getSetting() {
 	return new Promise((resolve, reject) => {
-		wx.login({success: resolve, fail: reject})
+		wx.getSetting({success: resolve, fail: reject})
 	})
 }
 
@@ -9,6 +9,18 @@ function getUserInfo() {
 		wx.getUserInfo({success: resolve, fail: reject})
 	})
 }
+
+function login() {
+	return new Promise((resolve, reject) => {
+		wx.login({success: resolve, fail: reject})
+	})
+}
+
+// function getUserInfo() {
+// 	return new Promise((resolve, reject) => {
+// 		wx.getUserInfo({success: resolve, fail: reject})
+// 	})
+// }
 
 function setStorage(key, value) {
 	return new Promise((resolve, reject) => {
@@ -29,6 +41,9 @@ function getLocation(type) {
 }
 
 module.exports = {
+	getSetting,
+	getUserInfo,
+
 	login,
 	getUserInfo,
 	setStorage,
