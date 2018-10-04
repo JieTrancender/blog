@@ -5,12 +5,13 @@ const dispatcher = new DispatcherManager.Dispatcher()
 class Websocket {
 	constructor(url) {
 		this.urlPath_ = 'wss://' + url + '/ws'
+		
 		this.initConn()
-		console.log('socketTask_:', this.socketTask_)
 	}
 
-	initConn() {
+	initConn = () => {
 		this.isConn_ = false
+
 		this.socketTask_ = wx.connectSocket({
 			url: this.urlPath_
 		})
@@ -21,29 +22,33 @@ class Websocket {
 		this.socketTask_.onClose(this.onClose)
 	}
 
-	onOpen(res) {
+	onOpen = res => {
+		let self = this
 		this.isConn_ = true
-		console.log('Websocket#onOpen', res)
+		console.log('Websocket#onOpen', this.isConn_)
 	}
 
-	onMessage(res) {
+	onMessage = res => {
 		let [module, oper, msg] = dispatcher.dispatch(res.data)
 		console.log(module + '.' + oper, msg)
 	}
 
-	onError(res) {
+	onError = res => {
+		this.isConn_ = false
 		console.log('Websocket#onError', res)
 	}
 
-	onClose(res) {
-		console.log('Websocket#onClose', res)
+	onClose = res => {
+		this.isConn_ = false
+		console.log('Websocket#onClose', this.isConn_)
 	}
 
-	isConn() {
+	isConn = res => {
+		console.log('isConn', this.isConn_)
 		return this.isConn_
 	}
 
-	reConn() {
+	reConn = () => {
 		this.initConn()
 	}
 

@@ -42,7 +42,7 @@ App({
   protobuf: protobuf,
   loginConf: loginConf,
   websocket: websocket,
-  dispatcher: dispatcher
+  dispatcher: dispatcher,
 
   onLaunch: function () {
     console.log('App Launch')
@@ -55,8 +55,6 @@ App({
       })
 
     this.globalData.websocket = new websocket.Websocket(serverDomain)
-    console.log('websocket:', this.globalData.websocket)
-
     this.globalData.dispatcher = new dispatcher.Dispatcher()
   },
   onShow: function() {
