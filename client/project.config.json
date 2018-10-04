@@ -9,7 +9,7 @@
 		"nodeModules": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "1.5.8",
 	"appid": "wxa020bb825fc38cc6",
 	"projectname": "blog-client",
 	"isGameTourist": false,

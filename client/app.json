@@ -2,23 +2,34 @@
   "pages":[
     "pages/index/index",
 
+    "pages/logs/logs",
+
+    "pages/index-weui/index",
+
     "pages/actionsheet/actionsheet",
     "pages/dialog/dialog",
     "pages/msg/msg",
     "pages/msg/msg_success",
     "pages/msg/msg_fail",
+    "pages/picker/picker",
+    "pages/toast/toast",
+
+    "pages/footer/footer",
+    "pages/panel/panel",
+    "pages/preview/preview",
+    "pages/flex/flex",
 
     "pages/profile/profile",
     "pages/splash/splash",
     "pages/board/board",
     "pages/search/search",
     "pages/index-default/index",
-    "pages/logs/logs"
+    "pages/logs-default/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "JieTrancender",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
@@ -27,6 +38,12 @@
     "borderStyle": "white",
     "backgroundColor": "#f8f9fb",
     "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-actived.png"
+      },
       {
         "text": "榜单",
         "pagePath": "pages/board/board",
