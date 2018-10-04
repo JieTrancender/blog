@@ -146,6 +146,12 @@ function getLocation(type) {
 
 module.exports = {
 	getSetting,
+<<<<<<< HEAD
+=======
+	getUserInfo,
+
+	login,
+>>>>>>> 8e0924b7459b463467724f267322413f71f7eb8e
 	getUserInfo,
 	navigateTo,
 	login,

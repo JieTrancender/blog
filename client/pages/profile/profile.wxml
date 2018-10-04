@@ -35,4 +35,12 @@
 		</view>
 	</view>
 	<view wx:else>请先升级微信客户端</view>
+		<view wx:if="{{userInfo}}}" class="page__desc">请先授权登陆!</view>
+		<view wx:else class="page__desc">欢迎您 {{userInfo.nickName}}!</view>
+	</view>
+	<view class="page__bd">
+		<view class="weui-btn-area">
+			<button wx:if="{{canIUse}}" class="weui-btn" type="defualt" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+		</view>
+	</view>
 </view>
