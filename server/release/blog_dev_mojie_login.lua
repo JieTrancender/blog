@@ -22,7 +22,7 @@ client_passwd = "o~p%e#r"
 
 server_id = 1
 
-mongo_hosts = "192.168.3.130:27017"
+mongo_hosts = "192.168.59.129:27017"
 mongo_user = nil
 mongo_passwd = nil
 mongo_db = "blog_release_test_game_"..server_id
