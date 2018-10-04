@@ -13,6 +13,17 @@ const douban = require('./utils/douban.js')
 
 const globalUtil = require('./utils/globalUtil.js')
 
+const protobuf = require('./weichatPb/protobuf.js')
+
+const loginConf = require('./js/login.js')
+
+const dispatcher = require('./utils/dispatcher.js')
+const websocket = require('./utils/websocket.js')
+
+const serverDomain = 'local.jie-trancender.org'
+
+
+
 App({
   /**
   * global shared
@@ -28,6 +39,10 @@ App({
   wechat: wechat,
   douban: douban,
   globalUtil: globalUtil,
+  protobuf: protobuf,
+  loginConf: loginConf,
+  websocket: websocket,
+  dispatcher: dispatcher
 
   onLaunch: function () {
     console.log('App Launch')
@@ -38,6 +53,11 @@ App({
       .then(res => {
         console.log(res.errMsg)
       })
+
+    this.globalData.websocket = new websocket.Websocket(serverDomain)
+    console.log('websocket:', this.globalData.websocket)
+
+    this.globalData.dispatcher = new dispatcher.Dispatcher()
   },
   onShow: function() {
     console.log("App Show")
@@ -45,8 +65,11 @@ App({
   onHide: function() {
     console.log("App Hide")
   },
+  
 
   globalData: {
-    data:{}
+    data:{},
+    websockt: null,
+    dispatcher: null,
   }
 })

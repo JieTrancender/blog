@@ -41,6 +41,9 @@ Page({
 	},
 	onShow: function() {
 		// console.log("Profile:onShow", app.globalData.userInfo)
+		// wx.connectSocket({
+	 //      url: 'wss://local.jie-trancender.org'
+	 //    })
 	},
 	onHide: function() {
 		// console.log("Profile:onHide")
@@ -61,7 +64,34 @@ Page({
 		app.wechat.setStorage('getUserInfoLogs', getUserInfoLogs)
 	},
 	bindShowLogs: function(e) {
-		console.log(e)
 		app.wechat.navigateTo('../logs/logs')
+	},
+	bindLoginServer: function(e) {
+		let websocket = app.globalData.websocket
+		console.log('websocket', websocket.isConn())
+
+		if (websocket.isConn()) {
+			let msg = {
+				username: 'fri51',
+				serverId: 1,
+				userAgent: '{\"userAgent:\"\"',
+				clientPasswd: 'client_passwd',
+			}
+
+			let websocket = app.globalData.websocket
+			websocket.send("login", "Login", msg)
+		} else {
+			app.wechat.showToast('网络重连中', 'loading', 3000)
+			websocket.reConn()
+		}
+	},
+	bindTestLogin: function(e) {
+		wx.connectSocket({
+			url: 'wss://local.jie-trancender.org/ws',
+		})
+
+		wx.onSocketOpen(function(res) {
+			console.log('wx.onSocketOpen', res)
+		})
 	}
 })
