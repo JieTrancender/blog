@@ -144,14 +144,23 @@ function getLocation(type) {
 	})
 }
 
+/**
+ *    异步展示提示
+ *    @method showToast
+ *    @author JTrancender 2018-10-04
+ *    @param  {string} title [description]
+ *    @param  {string} icon [description]
+ *    @param  {string} duration [description]
+ *    @return {nil} 
+ */
+function showToast(title, icon, duration) {
+	return new Promise((resolve, reject) => {
+		wx.showToast({title: title, icon: icon, duration: duration, success: resolve, fail: reject})
+	})
+}
+
 module.exports = {
 	getSetting,
-<<<<<<< HEAD
-=======
-	getUserInfo,
-
-	login,
->>>>>>> 8e0924b7459b463467724f267322413f71f7eb8e
 	getUserInfo,
 	navigateTo,
 	login,
@@ -165,6 +174,9 @@ module.exports = {
 	removeStorageSync,
 	clearStorage,
 	clearStorageSync,
+
+	showToast,
+
 	// getUserInfo,
 	getLocation,
 	original: wx
