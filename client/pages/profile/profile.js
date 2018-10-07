@@ -6,13 +6,15 @@ Page({
 		userInfo: null
 	},
 	onLoad: function() {
+		let self = this
 		app.wechat.getSetting()
 			.then(res => {
 				if (res.authSetting['scope.userInfo']) {
 					app.wechat.getUserInfo()
 						.then(res => {
-							app.globalData.userInfo = res.userInfo
-							app.globalData.hasLogin = true
+							// app.globalData.userInfo = res.userInfo
+							// app.globalData.hasLogin = true
+							app.updateUserInfo(res.userInfo)
 							this.setData({
 								userInfo: res.userInfo
 							})
@@ -38,6 +40,9 @@ Page({
 				})
 				app.wechat.setStorage('loginLogs', loginLogs)
 			})
+
+
+		app.globalData.eventMgr.observe('login.Login', self, this.login)
 	},
 	onShow: function() {
 		// console.log("Profile:onShow", app.globalData.userInfo)
@@ -53,8 +58,9 @@ Page({
 			userInfo: res.detail.userInfo
 		})
 
-		app.globalData.userInfo = this.data.userInfo
-		app.globalData.hasLogin = true
+		// app.globalData.userInfo = this.data.userInfo
+		// app.globalData.hasLogin = true
+		app.updateUserInfo(thsi.data.userInfo)
 		
 		let getUserInfoLogs = app.wechat.getStorageSync('getUserInfoLogs') || []
 		getUserInfoLogs.unshift({
@@ -72,7 +78,7 @@ Page({
 
 		if (websocket.isConn()) {
 			let msg = {
-				username: 'fri51',
+				username: app.globalData,
 				serverId: 1,
 				userAgent: '{\"userAgent:\"\"',
 				clientPasswd: 'client_passwd',
@@ -93,5 +99,8 @@ Page({
 		wx.onSocketOpen(function(res) {
 			console.log('wx.onSocketOpen', res)
 		})
+	},
+	login: function(res) {
+		console.log('login', res)
 	}
 })

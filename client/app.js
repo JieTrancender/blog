@@ -15,14 +15,19 @@ const globalUtil = require('./utils/globalUtil.js')
 
 const protobuf = require('./weichatPb/protobuf.js')
 
-const loginConf = require('./js/login.js')
+// const loginConf = require('./protobuf/login.js')
+const protocolConf = require('./protobuf/protocol.js')
 
 const dispatcher = require('./utils/dispatcher.js')
 const websocket = require('./utils/websocket.js')
 
-const serverDomain = 'local.jie-trancender.org'
+import {eventMgr} from './utils/event_mgr.js' 
 
+// const serverDomain = 'local.jie-trancender.org'
 
+// const serverDomain = 'wechat.jie-trancender.org'
+
+import {serverDomain} from './js/config.js'
 
 App({
   /**
@@ -40,7 +45,8 @@ App({
   douban: douban,
   globalUtil: globalUtil,
   protobuf: protobuf,
-  loginConf: loginConf,
+  // loginConf: loginConf,
+  protocolConf: protocolConf,
   websocket: websocket,
   dispatcher: dispatcher,
 
@@ -56,6 +62,10 @@ App({
 
     this.globalData.websocket = new websocket.Websocket(serverDomain)
     this.globalData.dispatcher = new dispatcher.Dispatcher()
+    this.globalData.eventMgr = eventMgr
+    console.log('eventMgr', this.globalData.eventMgr)
+    // this.globalData.eventMgr = new EventMgr()
+    
   },
   onShow: function() {
     console.log("App Show")
@@ -63,11 +73,31 @@ App({
   onHide: function() {
     console.log("App Hide")
   },
+
+  getProtocolConf: function(protocolName) {
+    console.log('getProtocolConf', protocolName)
+    return protocolConf[protocolName]
+  },
+
+  updateUserInfo: function(userInfo) {
+    this.globalData.userInfo = userInfo
+    this.globalData.login = true
+    console.log('updateUserInfo', userInfo)
+  },
+
+  updatePlayerInfo: function(playerInfo) {
+    this.globalData.playerInfo = playerInfo
+    console.log('updatePlayerInfo', playerInfo)
+  },
   
 
   globalData: {
     data:{},
     websockt: null,
     dispatcher: null,
+    eventMgr: null,
+    salt: '582865471',
+    userInfo: null,
+    playerInfo: null
   }
 })
