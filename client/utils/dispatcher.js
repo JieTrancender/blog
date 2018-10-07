@@ -22,7 +22,8 @@ class Dispatcher {
 		this.operIdList_ = ['RoleInfo', 'Login', 'LoginR']
 
 		this.pbList_ = {
-			login:	 require('../js/login.js')
+			login:	 require('../protobuf/login.js')
+			// login: 
 		}
 	}
 
@@ -35,10 +36,12 @@ class Dispatcher {
 	}
 
 	getProtobufConf(module) {
+		// console.log('getProtobufConf', app.protocolConf)
 		return this.pbList_[module]
 	}
 
 	pack(module, oper, msg) {
+		// console.log('pack', module, oper, msg, app.protocolConf)
 		let [id1, id2] = this.getId(module, oper)
 		let rootConf = this.getProtobufConf(module)
 		let ProtobufRoot = protobuf.Root.fromJSON(rootConf)
@@ -72,6 +75,7 @@ class Dispatcher {
 
 		let buf = new Uint8Array(msg, 6)
 		let [module, oper] = this.getPattern(id1 - 1, id2 - 1)
+		console.log('dispatch', module, oper)
 
 		let rootConf = this.getProtobufConf(module)
 		let ProtobufRoot = protobuf.Root.fromJSON(rootConf)

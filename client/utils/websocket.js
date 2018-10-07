@@ -2,6 +2,8 @@ const DispatcherManager = require('./dispatcher.js')
 
 const dispatcher = new DispatcherManager.Dispatcher()
 
+import {eventMgr} from './event_mgr.js'
+
 class Websocket {
 	constructor(url) {
 		this.urlPath_ = 'wss://' + url + '/ws'
@@ -20,6 +22,8 @@ class Websocket {
 		this.socketTask_.onMessage(this.onMessage)
 		this.socketTask_.onError(this.onError)
 		this.socketTask_.onClose(this.onClose)
+
+		console.log('Websocket', this)
 	}
 
 	onOpen = res => {
@@ -31,15 +35,21 @@ class Websocket {
 	onMessage = res => {
 		let [module, oper, msg] = dispatcher.dispatch(res.data)
 		console.log(module + '.' + oper, msg)
+		console.log('fix', module === "login", oper === "LoginR")
+		if (module === "login" && oper === "LoginR") {
+			eventMgr.trigger('login.Login', msg)
+		}
 	}
 
 	onError = res => {
 		this.isConn_ = false
+		// app.wechat.showToast('网络已断开', 'loading', 3000)
 		console.log('Websocket#onError', res)
 	}
 
 	onClose = res => {
 		this.isConn_ = false
+		// app.wechat.showToast('网络已断开', 'loading', 3000)
 		console.log('Websocket#onClose', this.isConn_)
 	}
 
